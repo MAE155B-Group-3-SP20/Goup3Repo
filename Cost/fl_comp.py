@@ -32,7 +32,7 @@ class FlyawayComp(ExplicitComponent):
         Tmax = inputs['Tmax']
         Mmax = inputs['Mmax']
 
-        outputs['Flyaway'] = 1.25*(7.37*We**0.82*V**0.484*Q**0.641*108+0.133*7.37*We**0.82*V**0.484*Q**0.641*98+3112*(0.043*Tmax+243.25*Mmax+0.969*Tinlet-2228)*EN+22.1*We**0.921*V**0.621*Q**0.799)
+        outputs['Flyaway'] = 1.25*((7.37*We**0.82*V**0.484*Q**0.641*108+0.133*7.37*We**0.82*V**0.484*Q**0.641*98)/Q+3112*(0.043*Tmax+243.25*Mmax+0.969*Tinlet-2228)*EN+(22.1*We**0.921*V**0.621*Q**0.799)/Q)
 
     def compute_partials(self, inputs, partials):
         Q = self.options['Q']
@@ -44,6 +44,6 @@ class FlyawayComp(ExplicitComponent):
         V = inputs['V']
         
 
-        partials['Flyaway', 'We'] =25.4426*Q**0.799*V**0.621/We**0.079+914.321*Q**0.641*V**0.484/We**0.18 
-        partials['Flyaway', 'V'] = 17.1551*Q**0.799*W**0.921/V**0.379+539.672*Q**0.641*W**0.82/V**0.516
+        partials['Flyaway', 'We'] =25.4426/Q**0.201*V**0.621/We**0.079+914.321/Q**0.359*V**0.484/We**0.18 
+        partials['Flyaway', 'V'] = 17.1551/Q**0.201*W**0.921/V**0.379+539.672/Q**0.359*W**0.82/V**0.516
   
