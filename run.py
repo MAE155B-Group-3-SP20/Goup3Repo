@@ -81,11 +81,11 @@ comp.add_output('crew_weight',val=1100, units='kg')
 comp.add_output('A', val=0.222) ## still need to fix these values #Modeling Constants
 comp.add_output('n', val=-0.6)#Modeling Constants
 ## Below prob okay
-comp.add_output('specific_fuel_consum', val=17.1, units= 'g/(kN*s)') #dependent on engine
+comp.add_output('specific_fuel_consum', val=0.0087, units= 'kg/(kN*s)') #dependent on engine General_Electric_CF6
 comp.add_output('MHFH', val=10) ## Maintaince Hour Per Flight Hour
 comp.add_output('M_max', val=0.83) ## Engine max mach number
-comp.add_output('T_max', val=106.802, units='kN') ## Engine max Thrust
-comp.add_output('EN', val=500 * 2) ## Engine Number
+comp.add_output('T_max', val=310, units='kN') ## Engine max Thrust
+comp.add_output('EN', val= 2) ## Engine Number
 comp.add_output('FH', val=3500, units='h') ###flight hour
 comp.add_output('FTA', val=3) ###FTA flight test
 comp.add_output('Q', val=500) ### Less number production

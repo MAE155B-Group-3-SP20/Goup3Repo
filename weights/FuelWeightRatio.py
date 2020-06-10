@@ -11,12 +11,12 @@ class FuelWeightRatio(ExplicitComponent):
         self.add_input('R')
         self.add_input('specific_fuel_consum')
         self.add_input('LD')
-        self.add_input('velocity_ms')
+        self.add_input('speed')
 
 
         self.add_output('Wfr')
 
-        self.declare_partials('Wfr', 'velocity_ms')
+        self.declare_partials('Wfr', 'speed')
         self.declare_partials('Wfr', 'LD')
         self.declare_partials('Wfr', 'specific_fuel_consum')
 
@@ -25,19 +25,19 @@ class FuelWeightRatio(ExplicitComponent):
         R=inputs['R']
         SFC = inputs['specific_fuel_consum']
         LD = inputs['LD']
-        V = inputs['velocity_ms']
+        V = inputs['speed']
      
 
-        outputs['Wfr'] = 1-np.exp((-1/LD)*R*SFC/V)
+        outputs['Wfr'] = 1-np.exp(-(9.807*R*SFC/(V*LD)))
         
     def compute_partials(self, inputs, partials):
    
         R=inputs['R']
         SFC = inputs['specific_fuel_consum']
         LD = inputs['LD']
-        V = inputs['velocity_ms']
+        V = inputs['speed']
         
 
-        partials['Wfr', 'velocity_ms'] = ((-1/LD)*R*(SFC/V**2))*np.exp(-1/LD*R*SFC/V)
+        partials['Wfr', 'speed'] = ((-1/LD)*R*(SFC/V**2))*np.exp(-1/LD*R*SFC/V)
         partials['Wfr', 'LD'] = ((-R*SFC/LD**2)/V)*np.exp(-1/LD*R*SFC/V)
         partials['Wfr', 'specific_fuel_consum'] =-((-1/LD)*R/V)*np.exp(-1/LD*R*SFC/V)
