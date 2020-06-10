@@ -38,6 +38,6 @@ class FuelWeightRatio(ExplicitComponent):
         V = inputs['speed']
         
 
-        partials['Wfr', 'speed'] = ((-1/LD)*R*(SFC/V**2))*np.exp(-1/LD*R*SFC/V)
-        partials['Wfr', 'LD'] = ((-R*SFC/LD**2)/V)*np.exp(-1/LD*R*SFC/V)
-        partials['Wfr', 'specific_fuel_consum'] =-((-1/LD)*R/V)*np.exp(-1/LD*R*SFC/V)
+        partials['Wfr', 'speed'] = ((-9.807/LD)*R*(SFC/V**2))*np.exp(-9.807/LD*R*SFC/V)
+        partials['Wfr', 'LD'] = ((-9.807*R*SFC/LD**2)/V)*np.exp(-9.807/LD*R*SFC/V)
+        partials['Wfr', 'specific_fuel_consum'] =-((-9.807/LD)*R/V)*np.exp(-9.807/LD*R*SFC/V)
